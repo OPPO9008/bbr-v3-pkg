@@ -76,7 +76,7 @@ jobs:
               CC="sccache clang" \
               HOSTCC="sccache clang" \
               -j`nproc` \
-              bindeb-pkg
+              bindeb-pkg > /dev/null
             # reset version
             rm .version
 
