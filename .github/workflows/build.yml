@@ -49,7 +49,7 @@ jobs:
           uses: mozilla-actions/sccache-action@v0.0.3
 
         - name: Get .config
-          run: curl -sSL https://raw.githubusercontent.com/Zxilly/bbr-v3-deb/master/.config > bbr/.config
+          run: curl -sSL https://raw.githubusercontent.com/OPPO9008/bbr-v3-deb/master/.config > bbr/.config
 
         - name: Setup cache
           uses: actions/cache@v3
@@ -100,18 +100,12 @@ jobs:
           with:
             name: deb
             path: linux-*.deb
-        
-        - name: Upload rpm
-          uses: actions/upload-artifact@v3
-          with:
-            name: rpm
-            path: /home/runner/rpmbuild/RPMS/x86_64/*.rpm
 
         - name: Release
           if: ${{ github.event.inputs.release != 'none' }}
           uses: ncipollo/release-action@v1
           with:
-            artifacts: "linux-*.deb,/home/runner/rpmbuild/RPMS/x86_64/*.rpm"
+            artifacts: "linux-*.deb"
             prerelease: ${{ github.event.inputs.release == 'pre-release' }}
             makeLatest: ${{ github.event.inputs.release == 'release' }}
             tag: ${{ steps.time.outputs.time }}
